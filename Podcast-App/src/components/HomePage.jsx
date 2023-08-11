@@ -25,6 +25,16 @@ export default function Data() {
     setFavourites(newFavouritesList);
   };
 
+  const formatUpdatedAt = (dateString) => {
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    return formattedDate;
+  };
+
   return (
 <div>
 
@@ -59,13 +69,14 @@ export default function Data() {
               </div>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">Seasons: {show.seasons}</li>
-                <li className="list-group-item">{show.updated}</li>
+                <li className="list-group-item"> Last updated: {formatUpdatedAt(show.updated)}</li>
                 <li className="list-group-item">
                   <AddFavourites
                     handleFavouritesClick={() => addFavouritesShow(show)}
                     isFavorite={favourites.includes(show)}
                   />
                 </li>
+                <li className="list-group-item"></li>
               </ul>
             </div>
             

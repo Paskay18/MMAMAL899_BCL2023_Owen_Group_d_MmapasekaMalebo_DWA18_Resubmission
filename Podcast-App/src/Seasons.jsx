@@ -8,12 +8,13 @@ export default function Seasons() {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    setLoading(true); // Set loading to true when starting a new fetch
+    setLoading(true);
     fetch(`https://podcast-api.netlify.app/id/${params.id}`)
       .then((response) => response.json())
       .then((data) => {
         setShow(data);
-        setLoading(false); // Set loading to false once data is fetched
+        setSelectedSeason(data.seasons[0]); // Set the first season as default
+        setLoading(false);
       });
   }, [params.id]);
 
@@ -26,7 +27,7 @@ export default function Seasons() {
   };
 
   return (
-    <div className="container text-center ">
+    <div className="container text-center">
       {loading ? (
         <h2>Loading.....</h2>
       ) : (
@@ -35,42 +36,53 @@ export default function Seasons() {
           <h2>{show.title}</h2>
           <p>{show.description}</p>
           {show.seasons && show.seasons.length > 0 ? (
-            show.seasons.map((season) => (
-              <div key={season.season}>
-                <div className="d-grid gap-2 col-6 mx-auto">
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={() => handleSeasonClick(season)}
-                  >
-                    <h4>Season {season.season}</h4>
-                    {season.description}
-                  </button>
-                </div>
-                {selectedSeason && selectedSeason.season === season.season && (
-                  <div>
-                    {selectedSeason.episodes.map((episode) => (
-                      <div key={episode.id}>
-                        <span>
-                          <img
-                            src={season.image}
-                            width={"30rem"}
-                            alt={episode.title}
-                          />
-                          <h3>
-                            {episode.episode}. {episode.title}
-                          </h3>
-                        </span>
-                        <p>{episode.description}</p>
-                        <audio controls>
-                          <source src={episode.file} />
-                        </audio>
-                      </div>
-                    ))}
-                  </div>
-                )}
+            <div>
+              <div className="btn-group">
+                <button
+                  type="button"
+                  className="btn btn-primary dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Seasons
+                </button>
+                <ul className="dropdown-menu">
+                  {show.seasons.map((season) => (
+                    <li key={season.season}>
+                      <button
+                        className="dropdown-item"
+                        onClick={() => handleSeasonClick(season)}
+                      >
+                        Season {season.season}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            ))
+              {selectedSeason && (
+                <div>
+                  <h3>Season {selectedSeason.season}</h3>
+                  {selectedSeason.episodes.map((episode) => (
+                    <div key={episode.id}>
+                      <span>
+                        <img
+                          src={show.image}
+                          width={"30rem"}
+                          alt={episode.title}
+                        />
+                        <h4>
+                          {episode.episode}: {episode.title}
+                        </h4>
+                      </span>
+                      <p>{episode.description}</p>
+                      <audio controls>
+                        <source src={episode.file} />
+                      </audio>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           ) : (
             <h2>No seasons available</h2>
           )}

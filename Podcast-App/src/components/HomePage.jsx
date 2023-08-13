@@ -2,6 +2,9 @@ import React from "react";
 import AddFavourites from "./AddFavourites";
 import { v4 as uuidv4 } from 'uuid';
 import { Link } from "react-router-dom";
+import Carousel from "./Carousel";
+import LogoHeader from "./LogoHeader";
+import NavBar from "./NavBar";
 
 export default function Data() {
   const v4Id = uuidv4();
@@ -35,7 +38,10 @@ export default function Data() {
   };
 
   return (
-    <div>
+    <div className="bg-black">
+      <LogoHeader />
+      <NavBar />
+      <Carousel />
       {favourites.length > 0 && (
         <div>
           <h2>Favorites:</h2>
@@ -48,12 +54,14 @@ export default function Data() {
           </ul>
         </div>
       )}
-
+      
       {loading ? ( // Display loading indicator while data is being fetched
         <h2>Loading.....</h2>
       ) : (
+        
         <div className="container">
-          <div className="row row-cols-3 row-cols-sm-2 row-cols-md-4 row-cols-lg-8">
+           
+          <div className="row row-cols-3 row-cols-sm-3 row-cols-md-6 row-cols-lg-9">
             {show.map((show) => (
               <div key={show.id} className="col mb-3 d-flex">
                 <div className="card flex-fill" style={{ width: "14rem" }}>

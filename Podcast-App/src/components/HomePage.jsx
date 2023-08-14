@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AddFavourites from "./AddFavourites";
 import { v4 as uuidv4 } from 'uuid';
 import { Link } from "react-router-dom";
 import Carousel from "./Carousel";
 import LogoHeader from "./LogoHeader";
 import NavBar from "./NavBar";
+import supabase from "../config/supabase";
 
 export default function Data() {
   const v4Id = uuidv4();
@@ -25,6 +26,7 @@ export default function Data() {
   const addFavouritesShow = (show) => {
     const newFavouritesList = [...favourites, show];
     setFavourites(newFavouritesList);
+    <p>hsbxhsbx</p>
   };
 
   const formatUpdatedAt = (dateString) => {
@@ -37,10 +39,47 @@ export default function Data() {
     return formattedDate;
   };
 
+
+  /* favs */
+  const [ fetchError, setFetchError] = useState(null)
+  const [ favouritesDatabase, setFavouritesDatabase] = useState(null)
+
+  useEffect(() => {
+    const fetchFavourites = async () => {
+      const { data, error } = await supabase
+        .from('favourites')
+        .select()
+
+        if(error){
+          setFetchError('error fetching data')
+          setFavouritesDatabase(null)
+          console.log(error)
+        }
+
+        if(data){
+          setFavouritesDatabase(data)
+          setFetchError(null)
+        }
+    }
+    fetchFavourites()
+  }, [])
+
   return (
     <div className="bg-black">
       <LogoHeader />
       <NavBar />
+
+      {/* {favouritesDatabase && (
+        <div className="favourites-data">
+
+          {favouritesDatabase.map((favs) => {
+            return(
+              <p style={{color:"white"}} >{favs.title}</p>
+            )
+          })}
+        </div>
+      )} */}
+
       <Carousel />
       {favourites.length > 0 && (
         <div>
@@ -52,6 +91,17 @@ export default function Data() {
               </div>
             ))}
           </ul>
+        </div>
+      )}
+
+      {favouritesDatabase && (
+        <div className="favourites-data">
+
+          {favouritesDatabase.map((favs) => {
+            return(
+              <p style={{color:"white"}} >{favs.title}</p>
+            )
+          })}
         </div>
       )}
       
@@ -76,7 +126,7 @@ export default function Data() {
                     <li className="list-group-item p-0">Last updated: {formatUpdatedAt(show.updated)}</li>
                     <li className="list-group-item p-0">
                       <AddFavourites
-                        handleFavouritesClick={() => addFavouritesShow(show)}
+                        handleFavouritesClick={() => {addFavouritesShow(show)}}
                         isFavorite={favourites.includes(show)}
                       />
                     </li>

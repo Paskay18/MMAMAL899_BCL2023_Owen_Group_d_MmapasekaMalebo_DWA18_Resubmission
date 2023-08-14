@@ -1,11 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import AddFavourites from "./AddFavourites";
+import supabase from "../config/supabase";
+import { StoreStatesFunc } from "./StoreStates";
 
 export default function Seasons() {
   const params = useParams();
   const [show, setShow] = React.useState({});
   const [selectedSeason, setSelectedSeason] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+
+  // const { setPlayerTitle, setPlayerAudio } = StoreStatesFunc()
 
   React.useEffect(() => {
     setLoading(true);
@@ -27,14 +32,25 @@ export default function Seasons() {
   };
 
   return (
-    <div className="container text-center">
+    <div className="container-fluid">
       {loading ? (
         <h2>Loading.....</h2>
       ) : (
-        <div>
+
+        
+      
+        <div >
+          
+         <button>Back</button>
+
+
+          <div className="text-center">
           <img src={show.image} width={"200rem"} alt={show.title} />
           <h2>{show.title}</h2>
           <p>{show.description}</p>
+         </div>
+         
+
           {show.seasons && show.seasons.length > 0 ? (
             <div>
               <div className="btn-group">
@@ -63,21 +79,46 @@ export default function Seasons() {
                 <div>
                   <h3>Season {selectedSeason.season}</h3>
                   {selectedSeason.episodes.map((episode) => (
+                    <div className="d-flex">
                     <div key={episode.id}>
-                      <span>
+                      <div  className="d-flex align-items-center">
+                      <div className="flex-shrink-0">
                         <img
                           src={show.image}
-                          width={"30rem"}
+                          width={"100rem"}
                           alt={episode.title}
                         />
+                       </div> 
+                        <div className="flex-grow-1 ms-3" >
                         <h4>
                           {episode.episode}: {episode.title}
                         </h4>
-                      </span>
+                     
                       <p>{episode.description}</p>
+                      </div>
+
+                      </div>
                       <audio controls>
                         <source src={episode.file} />
                       </audio>
+                      <AddFavourites 
+                        handleFavouritesClick={() => {
+                          const addFav = async () => {
+                            console.log('hfhg')
+                            const { data, error } = await supabase
+                              .from('favourites')
+                              .insert({
+                                    title: episode.title
+                              })
+                          }
+
+                          addFav()
+                        }}
+                      />
+                     
+                     
+                      
+                     </div>
                     </div>
                   ))}
                 </div>

@@ -1,28 +1,33 @@
 import './App.css'
 import Data from './components/HomePage'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Seasons from './Seasons'
+import Seasons from './components/Seasons'
 
 function App() {
 return (
 
 
-<BrowserRouter>
+<>
+    <BrowserRouter>
 
-  
-<Routes>
-  
-    <Route path='/' element={<Data />} />
-    <Route path='/:id' element={<Seasons />} />
-   
     
-  
-</Routes>
+    <Routes>
+    
+        <Route path='/' element={<Data />} />
+        <Route path='/:id' element={<Seasons />} />
+    
+        
+    
+    </Routes>
 
 
-</BrowserRouter>
- 
+    </BrowserRouter>
+    
+    <audio controls>
+    <source  />
+    </audio>
 
+</>
 
 )}
 

@@ -25,7 +25,7 @@ export default function Carousel() {
   return (
     <div
       id="randomImageCarousel"
-      className="container-fluid text-center carousel slide mb-2 p-0 position-relative"
+      className="container-fluid text-center carousel slide mb-2 mt-2 p-0 position-relative"
       data-bs-ride="carousel"
     >
       <div className="carousel-inner">

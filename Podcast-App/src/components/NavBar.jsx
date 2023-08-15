@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 export default function NavBar({ 
   sortShowsAZ={sortShowsAZ},
   showSortOrder,
-  resetShowData
+  resetShowData,
+  sortLatestOldest,
+  sortDateOrder
 
 }) {
   return (
@@ -14,7 +16,7 @@ export default function NavBar({
       </Link>
       
       <button onClick={sortShowsAZ}>Sort {showSortOrder === "asc" ? "Z-A" : "A-Z"} </button>
-   
+      <button onClick={sortLatestOldest}> Sort by Date {sortDateOrder === "ascending" ? "Newest First" : "Oldest First"} </button>
 
      <button onClick={resetShowData}>Clear</button>
       <svg

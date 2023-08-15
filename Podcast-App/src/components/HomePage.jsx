@@ -32,6 +32,7 @@ export default function Data() {
     const [loading, setLoading] = React.useState(true);
     const [selectedGenre, setSelectedGenre] = React.useState(null);
     const [showSortOrder, setShowSortOrder] = useState("asc");
+    const [sortDateOrder, setSortDateOrder] = useState("ascending")
 
   
   
@@ -87,6 +88,17 @@ export default function Data() {
       setShowData(sortedShows);
       setShowSortOrder(showSortOrder === "asc" ? "desc" : "asc");
     };
+
+    const sortLatestOldest = () => {
+      const sortedShows = show.slice().sort((a, b) => {
+        const dateA = new Date(a.updated).getTime();
+        const dateB = new Date(b.updated).getTime();
+        return sortDateOrder === "ascending" ? dateA - dateB : dateB - dateA;
+      });
+      setShowData(sortedShows);
+      setSortDateOrder(sortDateOrder === "ascending" ? "desc" : "ascending");
+    };
+    
     
  
  
@@ -142,7 +154,8 @@ function SortZToA(){
       sortShowsAZ={sortShowsAZ}
       showSortOrder={showSortOrder}
       resetShowData={resetShowData}
-      
+      sortLatestOldest={sortLatestOldest}
+      sortDateOrder={sortDateOrder}
       />
 
       {/* {favouritesDatabase && (

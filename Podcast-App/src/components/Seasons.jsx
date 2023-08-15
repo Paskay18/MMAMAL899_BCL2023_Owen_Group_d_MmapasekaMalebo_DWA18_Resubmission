@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AddFavourites from "./AddFavourites";
 import supabase from "../config/supabase";
 import { StoreStatesFunc } from "./StoreStates";
@@ -40,9 +40,9 @@ export default function Seasons() {
         
       
         <div >
-          
-         <button>Back</button>
-
+            <Link to="/">
+         <button className="m-3">Back</button>
+             </Link>
 
           <div className="text-center">
           <img src={show.image} width={"200rem"} alt={show.title} />
@@ -95,9 +95,13 @@ export default function Seasons() {
                         </h4>
                      
                       <p>{episode.description}</p>
+
+                     
+
                       </div>
 
                       </div>
+                      <div className="d-flex align-items-center  justify-centent-evenly mr-1">
                       <audio controls>
                         <source src={episode.file} />
                       </audio>
@@ -109,12 +113,15 @@ export default function Seasons() {
                               .from('favourites')
                               .insert({
                                     title: episode.title
+                                    
                               })
                           }
 
                           addFav()
                         }}
                       />
+                      </div>
+                     
                      
                      
                       

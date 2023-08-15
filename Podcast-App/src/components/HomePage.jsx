@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+
 import AddFavourites from "./AddFavourites";
 import { v4 as uuidv4 } from 'uuid';
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Carousel from "./Carousel";
 import LogoHeader from "./LogoHeader";
 import NavBar from "./NavBar";
@@ -23,50 +24,72 @@ const genres = [
 
 
 export default function Data() {
-  const v4Id = uuidv4();
+  
+    const v4Id = uuidv4();
+  
+    const [show, setShowData] = React.useState([]);
+    const [favourites, setFavourites] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
+    const [selectedGenre, setSelectedGenre] = React.useState(null);
+    const [showSortOrder, setShowSortOrder] = useState("asc");
 
-  const [show, setShowData] = React.useState([]);
-  const [favourites, setFavourites] = React.useState([]);
-  const [loading, setLoading] = React.useState(true); // New loading state
-  const [selectedGenre, setSelectedGenre] = React.useState(null); // New state for selected genre
-
-  React.useEffect(() => {
-    fetch("https://podcast-api.netlify.app/shows")
-      .then((response) => response.json())
-      .then((data) => {
-        setShowData(data);
-        setLoading(false); // Set loading to false once data is fetched
+  
+  
+    React.useEffect(() => {
+      fetch("https://podcast-api.netlify.app/shows")
+        .then((response) => response.json())
+        .then((data) => {
+          setShowData(data);
+          setLoading(false);
+        });
+    }, []);
+  
+    const addFavouritesShow = (show) => {
+      const newFavouritesList = [...favourites, show];
+      setFavourites(newFavouritesList);
+    };
+  
+    const formatUpdatedAt = (dateString) => {
+      const date = new Date(dateString);
+      const formattedDate = date.toLocaleDateString(undefined, {
+        year: "numeric",
+        day: "numeric",
+        month: "long",
       });
-  }, []);
+      return formattedDate;
+    };
+  
+    const handleGenreFilter = (genreId) => {
+      setSelectedGenre(genreId);
+      if (genreId === null) {
+        setShowData(show);
+      } else {
+        const filteredShows = show.filter((show) => show.genres.includes(genreId));
+        setShowData(filteredShows);
+      }
+    };
 
-  const addFavouritesShow = (show) => {
-    const newFavouritesList = [...favourites, show];
-    setFavourites(newFavouritesList);
-    <p>hsbxhsbx</p>
-  };
+    const resetShowData = () => {
+      fetch("https://podcast-api.netlify.app/shows")
+        .then((response) => response.json())
+        .then((data) => {
+          setShowData(data);
+          setLoading(false);
+        });
+    };
 
-  const formatUpdatedAt = (dateString) => {
-    const date = new Date(dateString);
-    const formattedDate = date.toLocaleDateString(undefined, {
-      year: "numeric",
-      day: "numeric",
-      month: "long",
-    });
-    return formattedDate;
-  };
-
-
-  const handleGenreFilter = (genreId) => {
-    setSelectedGenre(genreId); // Update the selected genre
-    if (genreId === null) {
-      setShowData(show); // Reset to original data when no genre is selected
-    } else {
-      const filteredShows = show.filter((show) => show.genres.includes(genreId));
-      setShowData(filteredShows);
-    }
-  };
-
-
+    const sortShowsAZ = () => {
+      const sortedShows = show.slice().sort((a, b) => {
+        return showSortOrder === "asc"
+          ? a.title.localeCompare(b.title)
+          : b.title.localeCompare(a.title);
+      });
+      setShowData(sortedShows);
+      setShowSortOrder(showSortOrder === "asc" ? "desc" : "asc");
+    };
+    
+ 
+ 
   /* favs */
   const [fetchError, setFetchError] = useState(null)
   const [favouritesDatabase, setFavouritesDatabase] = useState(null)
@@ -113,7 +136,14 @@ function SortZToA(){
   return (
     <div className="bg-black">
       <LogoHeader />
-      <NavBar selectedGenre={selectedGenre} handleGenreFilter={handleGenreFilter} />
+      <NavBar 
+      selectedGenre={selectedGenre} 
+      handleGenreFilter={handleGenreFilter}
+      sortShowsAZ={sortShowsAZ}
+      showSortOrder={showSortOrder}
+      resetShowData={resetShowData}
+      
+      />
 
       {/* {favouritesDatabase && (
         <div className="favourites-data">

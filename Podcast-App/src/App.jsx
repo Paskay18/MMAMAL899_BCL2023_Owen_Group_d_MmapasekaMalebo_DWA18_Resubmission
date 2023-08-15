@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Seasons from './components/Seasons'
 import Login from './components/Login'
 import SignOut from './components/Signout'
+import GenresSortSearch from './components/GenresSortSearch'
 
 function App() {
 return (
@@ -18,7 +19,7 @@ return (
         <Route path='/' element={<Data />} />
         <Route path='/:id' element={<Seasons />} />
         <Route path= "/login" element={<Login />} />
-       
+        <Route path="/genreSearchSort" element={<GenresSortSearch /> } />
     
     </Routes>
 

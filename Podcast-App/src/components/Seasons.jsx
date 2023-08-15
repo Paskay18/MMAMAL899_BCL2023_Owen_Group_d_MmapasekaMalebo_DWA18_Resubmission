@@ -9,6 +9,7 @@ export default function Seasons() {
   const [show, setShow] = React.useState({});
   const [selectedSeason, setSelectedSeason] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+  
 
   // const { setPlayerTitle, setPlayerAudio } = StoreStatesFunc()
 
@@ -23,7 +24,7 @@ export default function Seasons() {
       });
   }, [params.id]);
 
-  const handleSeasonClick = (season) => {
+  const handleSeasonClick = (season, event) => {
     if (selectedSeason && selectedSeason.season === season.season) {
       setSelectedSeason(null);
     } else {
@@ -105,6 +106,8 @@ export default function Seasons() {
                       <audio controls>
                         <source src={episode.file} />
                       </audio>
+                       
+                       
                       <AddFavourites 
                         handleFavouritesClick={() => {
                           const addFav = async () => {
@@ -112,7 +115,9 @@ export default function Seasons() {
                             const { data, error } = await supabase
                               .from('favourites')
                               .insert({
-                                    title: episode.title
+                                    showTitle: show.title,
+                                    title: episode.title,
+                                    image: show.image
                                     
                               })
                           }

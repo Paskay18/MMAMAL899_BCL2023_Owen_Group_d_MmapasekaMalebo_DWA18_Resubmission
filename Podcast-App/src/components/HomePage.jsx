@@ -7,12 +7,28 @@ import LogoHeader from "./LogoHeader";
 import NavBar from "./NavBar";
 import supabase from "../config/supabase";
 
+const genres = [
+  { id: 1, name: "Personal Growth" },
+  { id: 2, name: "True Crime and Investigative Journalism" },
+  { id: 3, name: "History" },
+  { id: 4, name: "Comedy" },
+  { id: 5, name: "Entertainment" },
+  { id: 6, name: "Business" },
+  { id: 7, name: "Fiction" },
+  { id: 8, name: "News" },
+  { id: 9, name: "Kids and Family" },
+];
+
+
+
+
 export default function Data() {
   const v4Id = uuidv4();
 
   const [show, setShowData] = React.useState([]);
   const [favourites, setFavourites] = React.useState([]);
   const [loading, setLoading] = React.useState(true); // New loading state
+  const [selectedGenre, setSelectedGenre] = React.useState(null); // New state for selected genre
 
   React.useEffect(() => {
     fetch("https://podcast-api.netlify.app/shows")
@@ -40,9 +56,27 @@ export default function Data() {
   };
 
 
+  const handleGenreFilter = (genreId) => {
+    setSelectedGenre(genreId); // Update the selected genre
+    if (genreId === null) {
+      setShowData(show); // Reset to original data when no genre is selected
+    } else {
+      const filteredShows = show.filter((show) => show.genres.includes(genreId));
+      setShowData(filteredShows);
+    }
+  };
+
+
   /* favs */
-  const [ fetchError, setFetchError] = useState(null)
-  const [ favouritesDatabase, setFavouritesDatabase] = useState(null)
+  const [fetchError, setFetchError] = useState(null)
+  const [favouritesDatabase, setFavouritesDatabase] = useState(null)
+  const [sortedFavs, setSortedFavs] = useState(null)
+  const [sortButtonClicked, setSortButtonClicked] = useState(false)
+
+function SortZToA(){
+  setSortedFavs(favouritesDatabase.sort((a,b) => b.showTitle.localeCompare(a.showTitle)))
+  setSortButtonClicked(true)
+}
 
   useEffect(() => {
     const fetchFavourites = async () => {
@@ -50,24 +84,36 @@ export default function Data() {
         .from('favourites')
         .select()
 
-        if(error){
-          setFetchError('error fetching data')
-          setFavouritesDatabase(null)
-          console.log(error)
-        }
+      if (error) {
+        setFetchError('error fetching data')
+        setFavouritesDatabase(null)
+        console.log(error)
+      }
 
-        if(data){
-          setFavouritesDatabase(data)
-          setFetchError(null)
-        }
+      if (data) {
+        setFavouritesDatabase(data)
+        setFetchError(null)
+      }
     }
     fetchFavourites()
-  }, [])
+  }, [favouritesDatabase])
+
+  const handleDelete = async (title) => {
+    const { data, error } = await supabase
+      .from('favourites')
+      .delete()
+      .eq('title', title)
+    if (error) {
+      console.log(error)
+    }
+    if (data) {
+    }
+  }
 
   return (
     <div className="bg-black">
       <LogoHeader />
-      <NavBar />
+      <NavBar selectedGenre={selectedGenre} handleGenreFilter={handleGenreFilter} />
 
       {/* {favouritesDatabase && (
         <div className="favourites-data">
@@ -95,22 +141,30 @@ export default function Data() {
       )}
 
       {favouritesDatabase && (
+        <>
+        <button onClick={SortZToA}>SortZToA</button>
         <div className="favourites-data">
-
-          {favouritesDatabase.map((favs) => {
-            return(
-              <p style={{color:"white"}} >{favs.title}</p>
+         
+          {( sortButtonClicked ? sortedFavs : favouritesDatabase).map((favs) => {
+            return (
+              <>
+                <img src={favs.image} width={"200rem"} />
+                <p style={{ color: "white" }} >Show: {favs.showTitle}</p>
+                <p style={{ color: "white" }} >Episode-Title: {favs.title}</p>
+                <button onClick={() => handleDelete(favs.title)}>Delete</button>
+              </>
             )
           })}
         </div>
+        </>
       )}
-      
+
       {loading ? ( // Display loading indicator while data is being fetched
         <h2>Loading.....</h2>
       ) : (
-        
+
         <div className="container">
-           
+
           <div className="row row-cols-3 row-cols-sm-3 row-cols-md-6 row-cols-lg-9">
             {show.map((show) => (
               <div key={show.id} className="col mb-3 d-flex">
@@ -126,7 +180,7 @@ export default function Data() {
                     <li className="list-group-item p-0">Last updated: {formatUpdatedAt(show.updated)}</li>
                     <li className="list-group-item p-0">
                       <AddFavourites
-                        handleFavouritesClick={() => {addFavouritesShow(show)}}
+                        handleFavouritesClick={() => addFavouritesShow(show)}
                         isFavorite={favourites.includes(show)}
                       />
                     </li>

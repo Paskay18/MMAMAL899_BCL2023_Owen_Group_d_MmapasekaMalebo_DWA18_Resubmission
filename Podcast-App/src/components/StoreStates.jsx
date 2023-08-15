@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react"
 const StoreStates = createContext()
 
 export function StoreStatesFunc(){
-     useContext(StoreStates)
+    return useContext(StoreStates)
 } 
 
 export default function StatesProvider({children}){

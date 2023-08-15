@@ -17,3 +17,49 @@
   backdrop-filter: blur(100%); /* Adjust the blur value as needed */
   z-index: -1;
 }
+
+
+/* GenresSortSearch.css */
+
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  flex: 1;
+}
+
+.btn-container {
+  display: flex;
+  align-items: center;
+}
+
+.genres-container {
+  margin-bottom: 20px;
+}
+
+.genres-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.genre-item {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.show-elements {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+

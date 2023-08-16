@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AddFavourites from "./AddFavourites";
 import { Link } from "react-router-dom";
+import LogoHeader from "./LogoHeader";
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -46,7 +47,7 @@ export default function Search() {
 
   return (
     <div className=" container-fluid bg-black ">
-      
+      <LogoHeader />
       <Link to="/">
       <button className="btn btn-primary m-3" >Back</button>
       

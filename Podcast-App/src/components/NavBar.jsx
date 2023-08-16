@@ -18,7 +18,7 @@ export default function NavBar({
       </div>
       
       <div>
-      <button className="btn btn-primary btn-sm"  onClick={sortShowsAZ}>Sort {showSortOrder === "asc" ? "Z-A" : "A-Z"} </button>
+      <button className="btn btn-primary btn-sm"  onClick={sortShowsAZ}>Sort {showSortOrder === "asc" ? "A-Z" : "Z-A"} </button>
         </div>
        
         <div>

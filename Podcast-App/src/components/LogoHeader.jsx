@@ -8,7 +8,7 @@ return (
 <div className="container-fluid d-flex justify-content-between align-items-center bg-black p-2">
 
 
-<img src="./src/assets/images/logo.png"  width={"100px"} height={"100px"}/>
+<img className="rounded-2 p-2" src="./src/assets/images/Pasi.png"  width={"100px"} height={"100px"}/>
 
 
  <div>

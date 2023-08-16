@@ -63,7 +63,7 @@ useEffect(() => {
         <div >
           <LogoHeader />
             <Link to="/">
-         <button className="m-3">Back</button>
+         <button className=" btn btn-primary m-3">Back</button>
              </Link>
 
           <div className="text-center">

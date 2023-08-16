@@ -74,35 +74,54 @@ export default function GenresSortSearch() {
   return (
     <div className="container-fluid">
       <LogoHeader />
+      <div className="d-flex justify-content-around m-1">
       <Link to="/"><button className="btn btn-primary">Back</button></Link>
+      <div>
+            <button className="btn btn-primary d-flex ">
+            <Link
+              to="."
+              style={{
+                textDecoration: "none",
+                marginLeft: "15px",
+                color: "black",
+                fontSize: "12px",
+                color: "white" 
+                 // Add margin before the "Clear" link
+              }}
+            >
+              Clear
+            </Link>
+            </button>
+           
+          </div>
+          </div>
       <div className="container-fluid row">
         <div className="d-flex">
-          <div className="d-flex flex-wrap">
+          <div className=" d-flex flex-wrap justify-content-center align-items-center">
+            
             {Object.keys(genres).map((genreId) => (
-              <Link
+           <button className="btn btn-primary m-1">
+           <Link
+              
                 key={genreId}
                 to={`?genres=${genreId}`}
                 style={{
                   textDecoration: "none",
                   color: "black",
-                  marginRight: "15px", // Add margin between genre links
+                  marginRight: "15px",
+                  fontSize: "12px",
+                  color: "white", // Add margin between genre links
                 }}
               >
                 {genres[genreId]}
               </Link>
+              </button>
             ))}
+          
+   
+
           </div>
-          <div>
-            <Link
-              to="."
-              style={{
-                textDecoration: "none",
-                marginLeft: "15px", // Add margin before the "Clear" link
-              }}
-            >
-              Clear
-            </Link>
-          </div>
+          
         </div>
       </div>
       <div className="row">{showElements}</div>

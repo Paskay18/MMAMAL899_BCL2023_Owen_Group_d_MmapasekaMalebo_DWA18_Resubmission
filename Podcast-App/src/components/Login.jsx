@@ -4,6 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useNavigate } from "react-router-dom";
+import LogoHeader from "./LogoHeader";
 
 const supabase = createClient(
   "https://sgcuecxeqiqzznshceyy.supabase.co",
@@ -22,6 +23,7 @@ export default function Login() {
 
   return (
     <div className="App">
+        
       <header className="App-Header">
         <Auth
           supabaseClient={supabase}

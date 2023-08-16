@@ -68,8 +68,8 @@ useEffect(() => {
 
           <div className="text-center">
           <img src={show.image} width={"200rem"} alt={show.title} />
-          <h2>{show.title}</h2>
-          <p>{show.description}</p>
+          <h2 className="fs-6">{show.title}</h2>
+          <p className="description">{show.description}</p>
          </div>
          
 
@@ -112,12 +112,12 @@ useEffect(() => {
                         />
                        </div> 
                         <div className="flex-grow-1 ms-3" >
-                        <h4>
+                        <h4 className="fs-6">
                           {episode.episode}: {episode.title}
                         </h4>
-                     
+                      <div className="description">
                       <p>{episode.description}</p>
-
+                      </div>
                      
 
                       </div>
@@ -139,7 +139,7 @@ useEffect(() => {
                                     showTitle: show.title,
                                     title: episode.title,
                                     image: show.image,
-                                    Added: show.updated
+                                    Added: show.Added
                                     
                               })
                           }

@@ -60,6 +60,21 @@ export default function Data() {
       return formattedDate;
     };
   
+    const dateAndTime = (dateString) => {
+      const date = new Date(dateString);
+      const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        timeZoneName: "short",
+      };
+      const formattedDate = date.toLocaleDateString(undefined, options);
+      return formattedDate;
+    };
+    
     const handleGenreFilter = (genreId) => {
       setSelectedGenre(genreId);
       if (genreId === null) {
@@ -109,11 +124,11 @@ export default function Data() {
   const [sortButtonClicked, setSortButtonClicked] = useState(false)
 
 function SortZToA(){
-  setSortedFavs(favouritesDatabase.sort((a,b) => b.showTitle.localeCompare(a.showTitle)))
+  setSortedFavs(favouritesDatabase.sort((a,b) => a.showTitle.localeCompare(b.showTitle)))
   setSortButtonClicked(true)
 }
 function SortAToZ(){
-  setSortedFavs(favouritesDatabase.sort((a,b) => a.showTitle.localeCompare(b.showTitle)))
+  setSortedFavs(favouritesDatabase.sort((a,b) => b.showTitle.localeCompare(a.showTitle)))
   setSortButtonClicked(true)
 }
 
@@ -211,10 +226,13 @@ function Oldest() {
       {(sortButtonClicked ? sortedFavs : favouritesDatabase).map((favs) => (
        <div className="p-2">
        <div className="col-md-3" key={favs.title}>
-          <img src={favs.image} width={"200rem"} />
+       <img src={favs.image} width={"200rem"} />
+         <div className="description">
           <p className="fs-6"style={{ color: "white" }}>Show: {favs.showTitle}</p>
           <p style={{ color: "white" }}>Episode Title: {favs.title}</p>
-          <p style={{ color: "white" }}>Added: {favs.Added}</p>
+          
+          <p style={{ color: "white" }}>Added: {dateAndTime(favs.Added)}</p>
+          </div>
           <button className="btn btn-primary btn-sm" onClick={() => handleDelete(favs.title)}>Delete</button>
         </div>
         </div>

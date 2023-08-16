@@ -216,12 +216,13 @@ function Oldest() {
 
 {favouritesDatabase && favouritesDatabase.length > 0 && (
   <>
-  <h2 style={{ color: "white" }}>Favourites</h2>
-    <button  className="btn btn-primary btn-sm" onClick={SortAToZ}>SortA-Z</button>
-    <button  className="btn btn-primary btn-sm" onClick={SortZToA}>SortZToA</button>
-    <button className="btn btn-primary btn-sm" onClick={Oldest}>Oldest </button>
-    <button className="btn btn-primary btn-sm" onClick={Newest}>Newest </button>
-    
+  <h2  className="m"style={{ color: "white" }}>Favourites</h2>
+   <div className="">
+    <button  className="btn btn-primary btn-sm  m-1 p-0" onClick={SortAToZ}>SortA-Z</button>
+    <button  className="btn btn-primary btn-sm  m-1 p-0" onClick={SortZToA}>SortZToA</button>
+    <button className="btn btn-primary btn-sm  m-1  p-0" onClick={Oldest}>Oldest </button>
+    <button className="btn btn-primary btn-sm  m-1 p-0" onClick={Newest}>Newest </button>
+    </div>
     <div className="favourites-data d-flex favourites-container ">
       {(sortButtonClicked ? sortedFavs : favouritesDatabase).map((favs) => (
        <div className="p-2">

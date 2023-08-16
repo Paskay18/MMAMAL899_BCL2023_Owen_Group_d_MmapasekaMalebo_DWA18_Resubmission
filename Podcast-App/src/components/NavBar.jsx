@@ -18,15 +18,15 @@ export default function NavBar({
       </div>
       
       <div>
-      <button className="btn btn-primary btn-sm"  onClick={sortShowsAZ}>Sort {showSortOrder === "asc" ? "A-Z" : "Z-A"} </button>
+      <button className="btn btn-primary btn-sm p-1"  onClick={sortShowsAZ}>Sort {showSortOrder === "asc" ? "A-Z" : "Z-A"} </button>
         </div>
        
         <div>
-        <button className="btn btn-primary btn-sm" onClick={sortLatestOldest}> Sort by Date {sortDateOrder === "ascending" ? "Newest First" : "Oldest First"} </button>
+        <button className="btn btn-primary btn-sm p-1" onClick={sortLatestOldest}> Sort by Date {sortDateOrder === "ascending" ? "Newest First" : "Oldest First"} </button>
 
         </div>
        
-     <button className="btn btn-primary btn-sm" onClick={resetShowData}>Clear</button>
+     <button className="btn btn-primary btn-sm p-1" onClick={resetShowData}>Clear</button>
         <div>
         
         </div>

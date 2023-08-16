@@ -201,21 +201,22 @@ function Oldest() {
 
 {favouritesDatabase && favouritesDatabase.length > 0 && (
   <>
-  <p>Favourites</p>
+  <h2 style={{ color: "white" }}>Favourites</h2>
     <button  className="btn btn-primary btn-sm" onClick={SortAToZ}>SortA-Z</button>
     <button  className="btn btn-primary btn-sm" onClick={SortZToA}>SortZToA</button>
     <button className="btn btn-primary btn-sm" onClick={Oldest}>Oldest </button>
     <button className="btn btn-primary btn-sm" onClick={Newest}>Newest </button>
     
-    <div className="favourites-data">
+    <div className="favourites-data d-flex favourites-container ">
       {(sortButtonClicked ? sortedFavs : favouritesDatabase).map((favs) => (
-       
+       <div className="p-2">
        <div className="col-md-3" key={favs.title}>
           <img src={favs.image} width={"200rem"} />
-          <p style={{ color: "white" }}>Show: {favs.showTitle}</p>
-          <p style={{ color: "white" }}>Episode-Title: {favs.title}</p>
+          <p className="fs-6"style={{ color: "white" }}>Show: {favs.showTitle}</p>
+          <p style={{ color: "white" }}>Episode Title: {favs.title}</p>
           <p style={{ color: "white" }}>Added: {favs.Added}</p>
-          <button onClick={() => handleDelete(favs.title)}>Delete</button>
+          <button className="btn btn-primary btn-sm" onClick={() => handleDelete(favs.title)}>Delete</button>
+        </div>
         </div>
       ))}
     </div>

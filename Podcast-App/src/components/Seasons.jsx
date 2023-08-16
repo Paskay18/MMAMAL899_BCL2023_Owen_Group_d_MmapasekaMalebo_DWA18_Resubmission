@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import AddFavourites from "./AddFavourites";
 import supabase from "../config/supabase";
@@ -10,6 +11,24 @@ export default function Seasons() {
   const [selectedSeason, setSelectedSeason] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   
+
+
+  const [userFavorites, setUserFavorites] = useState([]);
+
+useEffect(() => {
+  const fetchUserFavorites = async () => {
+    const { data, error } = await supabase
+      .from("favourites")
+      .select();
+
+    if (!error) {
+      setUserFavorites(data || []);
+    }
+  };
+
+  fetchUserFavorites();
+}, []);
+
 
   // const { setPlayerTitle, setPlayerAudio } = StoreStatesFunc()
 
@@ -125,6 +144,9 @@ export default function Seasons() {
 
                           addFav()
                         }}
+                        isFavorite={userFavorites.some(
+                          (fav) => fav.title === episode.title
+                        )}
                       />
                       </div>
                      

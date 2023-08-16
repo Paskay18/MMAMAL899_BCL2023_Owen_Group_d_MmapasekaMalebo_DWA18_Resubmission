@@ -80,7 +80,11 @@ export default function GenresSortSearch() {
             </Link>
           ))}
           <Link to=".">Clear</Link>
+
+          <Link to="/">Back</Link>
         </div>
+        
+        
 
         <div className="row">{showElements}</div>
       </div>

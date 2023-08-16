@@ -117,7 +117,8 @@ export default function Seasons() {
                               .insert({
                                     showTitle: show.title,
                                     title: episode.title,
-                                    image: show.image
+                                    image: show.image,
+                                    Added: show.updated
                                     
                               })
                           }

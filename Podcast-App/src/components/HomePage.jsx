@@ -112,6 +112,22 @@ function SortZToA(){
   setSortedFavs(favouritesDatabase.sort((a,b) => b.showTitle.localeCompare(a.showTitle)))
   setSortButtonClicked(true)
 }
+function SortAToZ(){
+  setSortedFavs(favouritesDatabase.sort((a,b) => a.showTitle.localeCompare(b.showTitle)))
+  setSortButtonClicked(true)
+}
+
+function Newest() {
+  setSortedFavs(favouritesDatabase.sort((a, b) => new Date(b.Added) - new Date(a.Added)));
+  setSortButtonClicked(true);
+}
+
+function Oldest() {
+  setSortedFavs(favouritesDatabase.sort((a, b) => new Date(a.Added) - new Date(b.Added)));
+  setSortButtonClicked(true);
+}
+
+
 
   useEffect(() => {
     const fetchFavourites = async () => {
@@ -183,24 +199,29 @@ function SortZToA(){
         </div>
       )}
 
-      {favouritesDatabase && (
-        <>
-        <button onClick={SortZToA}>SortZToA</button>
-        <div className="favourites-data">
-         
-          {( sortButtonClicked ? sortedFavs : favouritesDatabase).map((favs) => {
-            return (
-              <>
-                <img src={favs.image} width={"200rem"} />
-                <p style={{ color: "white" }} >Show: {favs.showTitle}</p>
-                <p style={{ color: "white" }} >Episode-Title: {favs.title}</p>
-                <button onClick={() => handleDelete(favs.title)}>Delete</button>
-              </>
-            )
-          })}
+{favouritesDatabase && favouritesDatabase.length > 0 && (
+  <>
+  <p>Favourites</p>
+    <button  className="btn btn-primary btn-sm" onClick={SortAToZ}>SortA-Z</button>
+    <button  className="btn btn-primary btn-sm" onClick={SortZToA}>SortZToA</button>
+    <button className="btn btn-primary btn-sm" onClick={Oldest}>Oldest </button>
+    <button className="btn btn-primary btn-sm" onClick={Newest}>Newest </button>
+    
+    <div className="favourites-data">
+      {(sortButtonClicked ? sortedFavs : favouritesDatabase).map((favs) => (
+       
+       <div className="col-md-3" key={favs.title}>
+          <img src={favs.image} width={"200rem"} />
+          <p style={{ color: "white" }}>Show: {favs.showTitle}</p>
+          <p style={{ color: "white" }}>Episode-Title: {favs.title}</p>
+          <p style={{ color: "white" }}>Added: {favs.Added}</p>
+          <button onClick={() => handleDelete(favs.title)}>Delete</button>
         </div>
-        </>
-      )}
+      ))}
+    </div>
+  </>
+)}
+
 
       {loading ? ( // Display loading indicator while data is being fetched
         <h2>Loading.....</h2>

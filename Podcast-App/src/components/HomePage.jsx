@@ -244,11 +244,15 @@ function Oldest() {
                     <li className="list-group-item p-0">Seasons: {show.seasons}</li>
                     <li className="list-group-item p-0">Last updated: {formatUpdatedAt(show.updated)}</li>
                     <li className="list-group-item p-0">
-                      {/* <AddFavourites
+    {show.genres.map((genreId) => genres.find(genre => genre.id === genreId)?.name).join(", ")}
+  </li>
+                    {/* <li className="list-group-item p-0">
+
+                      <AddFavourites
                         handleFavouritesClick={() => addFavouritesShow(show)}
                         isFavorite={favourites.includes(show)}
-                      /> */}
-                    </li>
+                      />
+                    </li> */}
                   </ul>
                 </div>
               </div>

@@ -28,10 +28,10 @@ export default function Search() {
     return formattedDate;
   };
 
-  const addFavouritesShow = (show) => {
-    const newFavouritesList = [...favourites, show];
-    setFavourites(newFavouritesList);
-  };
+//   const addFavouritesShow = (show) => {
+//     const newFavouritesList = [...favourites, show];
+//     setFavourites(newFavouritesList);
+//   };
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -88,7 +88,8 @@ export default function Search() {
                   <li className="list-group-item p-0">
                     Last updated: {formatUpdatedAt(show.updated)}
                   </li>
-                  <li className="list-group-item p-0">
+                  
+                  <li className="list-group-item ">
                     {/* <AddFavourites
                       handleFavouritesClick={() => addFavouritesShow(show)}
                       isFavorite={favourites.includes(show)}

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import AddFavourites from "./AddFavourites";
+import LogoHeader from "./LogoHeader";
 
 const genres = {
   1: "Personal Growth",
@@ -71,23 +72,40 @@ export default function GenresSortSearch() {
   ));
 
   return (
-    <div className="container">
-      <div className="row">
-        <div>
-          {Object.keys(genres).map((genreId) => (
-            <Link key={genreId} to={`?genres=${genreId}`}>
-              {genres[genreId]}
+    <div className="container-fluid">
+      <LogoHeader />
+      <Link to="/"><button className="btn btn-primary">Back</button></Link>
+      <div className="container-fluid row">
+        <div className="d-flex">
+          <div className="d-flex flex-wrap">
+            {Object.keys(genres).map((genreId) => (
+              <Link
+                key={genreId}
+                to={`?genres=${genreId}`}
+                style={{
+                  textDecoration: "none",
+                  color: "black",
+                  marginRight: "15px", // Add margin between genre links
+                }}
+              >
+                {genres[genreId]}
+              </Link>
+            ))}
+          </div>
+          <div>
+            <Link
+              to="."
+              style={{
+                textDecoration: "none",
+                marginLeft: "15px", // Add margin before the "Clear" link
+              }}
+            >
+              Clear
             </Link>
-          ))}
-          <Link to=".">Clear</Link>
-
-          <Link to="/">Back</Link>
+          </div>
         </div>
-        
-        
-
-        <div className="row">{showElements}</div>
       </div>
+      <div className="row">{showElements}</div>
     </div>
   );
 }

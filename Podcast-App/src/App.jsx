@@ -7,6 +7,7 @@ import SignOut from './components/Signout'
 import GenresSortSearch from './components/Genres'
 import Search from './components/Search'
 
+
 function App() {
 return (
 
@@ -22,7 +23,7 @@ return (
         <Route path= "/login" element={<Login />} />
         <Route path="/genreSearchSort" element={<GenresSortSearch /> } />
         <Route path="/search" element={<Search />} />
-    
+        
     </Routes>
 
 

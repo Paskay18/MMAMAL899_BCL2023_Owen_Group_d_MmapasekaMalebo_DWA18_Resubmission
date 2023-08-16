@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import AddFavourites from "./AddFavourites";
 import supabase from "../config/supabase";
 import { StoreStatesFunc } from "./StoreStates";
+import LogoHeader from "./LogoHeader";
 
 export default function Seasons() {
   const params = useParams();
@@ -52,7 +53,7 @@ useEffect(() => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container- ">
       {loading ? (
         <h2>Loading.....</h2>
       ) : (
@@ -60,6 +61,7 @@ useEffect(() => {
         
       
         <div >
+          <LogoHeader />
             <Link to="/">
          <button className="m-3">Back</button>
              </Link>

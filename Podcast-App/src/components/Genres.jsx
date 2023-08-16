@@ -60,10 +60,10 @@ export default function GenresSortSearch() {
             Last updated: {formatUpdatedAt(show.updated)}
           </li>
           <li className="list-group-item p-0">
-            <AddFavourites
+            {/* <AddFavourites
               handleFavouritesClick={() => addFavouritesShow(show)}
               isFavorite={favourites.includes(show)}
-            />
+            /> */}
           </li>
         </ul>
       </div>

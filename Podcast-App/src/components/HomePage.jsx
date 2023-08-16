@@ -163,7 +163,7 @@ function Oldest() {
 
   return (
     <div className="bg-black">
-      <LogoHeader />
+       <LogoHeader />
       <NavBar 
       selectedGenre={selectedGenre} 
       handleGenreFilter={handleGenreFilter}
@@ -244,10 +244,10 @@ function Oldest() {
                     <li className="list-group-item p-0">Seasons: {show.seasons}</li>
                     <li className="list-group-item p-0">Last updated: {formatUpdatedAt(show.updated)}</li>
                     <li className="list-group-item p-0">
-                      <AddFavourites
+                      {/* <AddFavourites
                         handleFavouritesClick={() => addFavouritesShow(show)}
                         isFavorite={favourites.includes(show)}
-                      />
+                      /> */}
                     </li>
                   </ul>
                 </div>

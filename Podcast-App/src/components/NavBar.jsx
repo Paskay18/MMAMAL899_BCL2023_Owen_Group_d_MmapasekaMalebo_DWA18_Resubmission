@@ -11,12 +11,9 @@ export default function NavBar({
 }) {
   return (
     <div className="navBar container-fluid d-flex justify-content-evenly p-1 ">
-      
-     
-      
-      <div>
+    <div>
  <Link to="/genreSearchSort">
-        <button className="btn btn-primary btn-sm">Genres</button>
+        <button className="btn btn-primary btn-sm p-1">Genres</button>
       </Link>
       </div>
       

@@ -45,14 +45,14 @@ export default function Search() {
   };
 
   return (
-    <div className=" container bg-black ">
+    <div className=" container-fluid bg-black ">
       
       <Link to="/">
       <button className="btn btn-primary m-3" >Back</button>
       
       </Link>
      
-      <div className="d-flex align-items-center">
+      <div className="d-flex align-items-center justify-content-center ">
         <input
           type="text"
           value={searchTerm}
@@ -89,10 +89,10 @@ export default function Search() {
                     Last updated: {formatUpdatedAt(show.updated)}
                   </li>
                   <li className="list-group-item p-0">
-                    <AddFavourites
+                    {/* <AddFavourites
                       handleFavouritesClick={() => addFavouritesShow(show)}
                       isFavorite={favourites.includes(show)}
-                    />
+                    /> */}
                   </li>
                 </ul>
               </div>

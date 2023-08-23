@@ -41,10 +41,10 @@ export default function GenresSortSearch() {
     return formattedDate;
   };
 
-  const addFavouritesShow = (show) => {
-    const newFavouritesList = [...favourites, show];
-    setFavourites(newFavouritesList);
-  };
+  // const addFavouritesShow = (show) => {
+  //   const newFavouritesList = [...favourites, show];
+  //   setFavourites(newFavouritesList);
+  // };
 
   const showElements = differentGenres.map((show) => (
     <div className="col-4 col-sm-3 col-md-3 col-lg-2 mb-3" key={show.id}>
@@ -86,7 +86,7 @@ export default function GenresSortSearch() {
                 color: "black",
                 fontSize: "12px",
                 color: "white" 
-                 // Add margin before the "Clear" link
+                 
               }}
             >
               Clear
@@ -110,7 +110,7 @@ export default function GenresSortSearch() {
                   color: "black",
                   marginRight: "15px",
                   fontSize: "12px",
-                  color: "white", // Add margin between genre links
+                  color: "white", 
                 }}
               >
                 {genres[genreId]}

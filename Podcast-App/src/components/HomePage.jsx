@@ -34,6 +34,13 @@ export default function Data() {
     const [showSortOrder, setShowSortOrder] = useState("asc");
     const [sortDateOrder, setSortDateOrder] = useState("ascending")
 
+      /* favs */
+  const [fetchError, setFetchError] = useState(null)
+  const [favouritesDatabase, setFavouritesDatabase] = useState(null)
+  const [sortedFavs, setSortedFavs] = useState(null)
+  const [sortButtonClicked, setSortButtonClicked] = useState(false)
+
+
   
   
     React.useEffect(() => {
@@ -50,6 +57,8 @@ export default function Data() {
       setFavourites(newFavouritesList);
     };
   
+
+    //changes date on the shows
     const formatUpdatedAt = (dateString) => {
       const date = new Date(dateString);
       const formattedDate = date.toLocaleDateString(undefined, {
@@ -60,6 +69,8 @@ export default function Data() {
       return formattedDate;
     };
   
+
+    //changes date on the favourite shows
     const dateAndTime = (dateString) => {
       const date = new Date(dateString);
       const options = {
@@ -116,19 +127,14 @@ export default function Data() {
     
     
  
- 
-  /* favs */
-  const [fetchError, setFetchError] = useState(null)
-  const [favouritesDatabase, setFavouritesDatabase] = useState(null)
-  const [sortedFavs, setSortedFavs] = useState(null)
-  const [sortButtonClicked, setSortButtonClicked] = useState(false)
+ //favourites sorting
 
 function SortZToA(){
-  setSortedFavs(favouritesDatabase.sort((a,b) => a.showTitle.localeCompare(b.showTitle)))
+  setSortedFavs(favouritesDatabase.sort((a,b) => b.showTitle.localeCompare(a.showTitle)))
   setSortButtonClicked(true)
 }
 function SortAToZ(){
-  setSortedFavs(favouritesDatabase.sort((a,b) => b.showTitle.localeCompare(a.showTitle)))
+  setSortedFavs(favouritesDatabase.sort((a,b) => a.showTitle.localeCompare(b.showTitle)))
   setSortButtonClicked(true)
 }
 
@@ -201,6 +207,9 @@ function Oldest() {
       )} */}
 
       <Carousel />
+
+
+{/*       
       {favourites.length > 0 && (
         <div>
           <h2>Favorites:</h2>
@@ -212,7 +221,9 @@ function Oldest() {
             ))}
           </ul>
         </div>
-      )}
+      )} */}
+
+      {/* displays the favourites */}
 
 {favouritesDatabase && favouritesDatabase.length > 0 && (
   <>
@@ -242,7 +253,7 @@ function Oldest() {
   </>
 )}
 
-
+    {/* displays show data */}
       {loading ? ( // Display loading indicator while data is being fetched
         <h2>Loading.....</h2>
       ) : (
@@ -263,8 +274,8 @@ function Oldest() {
                     <li className="list-group-item p-0">Seasons: {show.seasons}</li>
                     <li className="list-group-item p-0">Last updated: {formatUpdatedAt(show.updated)}</li>
                     <li className="list-group-item p-0">
-    {show.genres.map((genreId) => genres.find(genre => genre.id === genreId)?.name).join(", ")}
-  </li>
+                      {show.genres.map((genreId) => genres.find(genre => genre.id === genreId)?.name).join(", ")}
+                    </li>
                     {/* <li className="list-group-item p-0">
 
                       <AddFavourites

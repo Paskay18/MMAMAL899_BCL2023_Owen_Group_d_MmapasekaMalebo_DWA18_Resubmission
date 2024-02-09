@@ -10,5 +10,3 @@ React: Implemented for creating the podcast website or any interactive component
 JavaScript: Leveraged to enhance interactivity and functionality within the podcast platform.
 Bootstrap: Utilized for styling and ensuring a responsive design.
 
-
-Netlify link to the project : https://polite-twilight-2d0c00.netlify.app/

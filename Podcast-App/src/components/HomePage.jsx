@@ -183,7 +183,7 @@ function Oldest() {
   }
 
   return (
-    <div className="bg-black">
+    <div className="bg-gray">
        <LogoHeader />
       <NavBar 
       selectedGenre={selectedGenre} 
@@ -205,9 +205,9 @@ function Oldest() {
           })}
         </div>
       )} */}
-
+ <div className="bg-black">
       <Carousel />
-
+</div>
 
 {/*       
       {favourites.length > 0 && (

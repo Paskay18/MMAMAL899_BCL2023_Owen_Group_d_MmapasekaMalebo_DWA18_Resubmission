@@ -5,8 +5,13 @@
 Netlify link to the project : https://polite-twilight-2d0c00.netlify.app/ 
 
 ## Technologies used
+React <br>
+Vite <br>
+Supabase <br>
+Bootsrap<br>
 
-React: Implemented for creating the podcast website or any interactive components.
-JavaScript: Leveraged to enhance interactivity and functionality within the podcast platform.
-Bootstrap: Utilized for styling and ensuring a responsive design.
+## About the app
+This is a podcas app that allows the user to login and out <br>
+It allows the user to view different episodes and seasons of each show<br>
+It allows user to play the episodes
 
